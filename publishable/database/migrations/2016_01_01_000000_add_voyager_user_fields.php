@@ -5,12 +5,22 @@ use Illuminate\Database\Migrations\Migration;
 class AddVoyagerUserFields extends Migration
 {
     /**
+     * @return string
+     */
+    protected function getUsersTableName()
+    {
+        $userModel = config('voyager.user.namespace');
+        return (new $userModel())->getTable();
+    }
+
+    /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            if (!Schema::hasColumn('users', 'avatar')) {
+        $userTableName = $this->getUsersTableName();
+        Schema::table($userTableName, function ($table) use ($userTableName) {
+            if (!Schema::hasColumn($userTableName, 'avatar')) {
                 $table->string('avatar')->nullable()->after('email')->default('users/default.png');
             }
             $table->integer('role_id')->nullable()->after('id');
@@ -22,13 +32,14 @@ class AddVoyagerUserFields extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('users', 'avatar')) {
-            Schema::table('users', function ($table) {
+        $userTableName = $this->getUsersTableName();
+        if (Schema::hasColumn($userTableName, 'avatar')) {
+            Schema::table($userTableName, function ($table) {
                 $table->dropColumn('avatar');
             });
         }
-        if (Schema::hasColumn('users', 'role_id')) {
-            Schema::table('users', function ($table) {
+        if (Schema::hasColumn($userTableName, 'role_id')) {
+            Schema::table($userTableName, function ($table) {
                 $table->dropColumn('role_id');
             });
         }
