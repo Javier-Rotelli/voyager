@@ -1,9 +1,11 @@
 <?php
 
-use TCG\Voyager\Database\VoyagerMigration;
+use Illuminate\Database\Migrations\Migration;
+use TCG\Voyager\Database\VoyagerConfig;
 
-class AddVoyagerUserFields extends VoyagerMigration
+class AddVoyagerUserFields extends Migration
 {
+    use VoyagerConfig;
     /**
      * Run the migrations.
      */

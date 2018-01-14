@@ -4,7 +4,7 @@ namespace TCG\Voyager\Database;
 
 use Illuminate\Database\Migrations\Migration;
 
-class VoyagerMigration
+trait VoyagerConfig
 {
     /**
      * @return string

@@ -1,11 +1,13 @@
 <?php
 
-use TCG\Voyager\Database\VoyagerMigration;
+use \Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use TCG\Voyager\Database\VoyagerConfig;
 
-class CreateUserRolesTable extends VoyagerMigration
+class CreateUserRolesTable extends Migration
 {
+    use VoyagerConfig;
     /**
      * Run the migrations.
      *
