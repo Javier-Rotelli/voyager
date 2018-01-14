@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use \TCG\Voyager\Database\VoyagerMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserRoleRelationship extends Migration
+class AddUserRoleRelationship extends VoyagerMigration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddUserRoleRelationship extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table(self::getUsersTableName(), function (Blueprint $table) {
             $table->unsignedInteger('role_id')->change();
             $table->foreign('role_id')->references('id')->on('roles');
         });
@@ -26,7 +26,7 @@ class AddUserRoleRelationship extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table(self::getUsersTableName(), function (Blueprint $table) {
             $table->integer('role_id')->change();
             $table->dropForeign(['role_id']);
         });

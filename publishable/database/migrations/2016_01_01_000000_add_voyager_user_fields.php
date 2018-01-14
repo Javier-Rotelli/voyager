@@ -1,18 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use TCG\Voyager\Database\VoyagerMigration;
 
-class AddVoyagerUserFields extends Migration
+class AddVoyagerUserFields extends VoyagerMigration
 {
-    /**
-     * @return string
-     */
-    protected function getUsersTableName()
-    {
-        $userModel = config('voyager.user.namespace');
-        return (new $userModel())->getTable();
-    }
-
     /**
      * Run the migrations.
      */
